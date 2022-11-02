@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈结构</title>
+</head>
+<body>
+
+    <script>
+        /**
+         * 1.基于数组实现栈结构
+         * Method：和某一个对象实例有联系（对象里的(函数)叫方法）
+         * function
+        */
+       // 封装栈类
+       function Stack(){
+        // 栈的属性
+        this.items = []
+        // 栈的相关操作
+
+        // 1.压栈
+        Stack.prototype.push = function(element){
+            this.items.push(element)
+
+        }
+        // 2.取元素(栈顶)
+        Stack.prototype.pop = function(){
+            // 除最后一个数组元素
+            return this.items.pop()
+        }
+        // 3.查看栈顶元素 peek:一瞥，看一眼
+        Stack.prototype.peek = function(){
+            return this.items[this.items.length-1]
+        }
+        // 4.判断是否为空
+        Stack.prototype.isEmpty = function(){
+            return this.items.length === 0
+        }
+        // 5.获取栈元素个数
+        Stack.prototype.size = function(){
+            return this.items.length
+        }
+        // 6.toString
+        Stack.prototype.toString = function(){
+            let resStr = ''
+            for (let index = 0; index < this.items.length; index++) {
+               resStr += this.items[index] + ''
+            }
+            return resStr
+        }
+
+       }
+
+  
+
+       function dec2binary(decNum=0){
+        const s = new Stack()
+        // while循环 只有当条件成立时 才会循环
+        while(decNum>0){
+            // 余数
+            s.push(decNum % 2)
+            // 整除后的结果
+            decNum = Math.floor(decNum / 2)
+        }
+        let binaryStr = ''
+        while(!s.isEmpty()){
+            binaryStr += s.pop()
+        }
+        return binaryStr
+       }
+
+       console.log(dec2binary(100)) 
+
+    </script>
+</body>
+</html>
